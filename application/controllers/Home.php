@@ -65,7 +65,7 @@ class Home extends CI_Controller {
 
 		$this->db->query('use '.$_SESSION['db_name']);
 		$column = $this->db->list_fields($slug);
-		print_r($column);
+		//print_r($column);
 	}
 	public function add_table(){
 		$this->db->query('use '.$_SESSION['db_name']);
