@@ -93,6 +93,23 @@ class Home extends CI_Controller {
 		echo '<table>';
 
 	}
+	public function datatypes(){
+		$db = $_SESSION['db_name'];
+		$this->db->query('use '.$_SESSION['db_name']);
+		//print_r($column);
+		$query = "SELECT distinct data_type  FROM INFORMATION_SCHEMA.COLUMNS";
+		$result = $this->db->query($query)->result_array(); 
+		echo '<table border="2">';
+		echo '<tr>';
+		echo '<td>DATA_TYPE</td>';
+		echo '</tr>';
+		foreach($result as $results){
+			echo '<tr>';
+			echo '<td>'.$results["data_type"].'</td>';
+			echo '</tr>';
+		}
+		echo '<table>';
+	}
 	public function add_table(){
 		$this->db->query('use '.$_SESSION['db_name']);
 		// define table fields

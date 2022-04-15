@@ -61,3 +61,5 @@ $route['table/(:any)'] = 'home/table/$1';
 $route['database/(:any)'] = 'home/connect/$1';
 
 $route['add-table'] = 'home/add_table';
+
+$route['datatypes'] = 'home/datatypes';
