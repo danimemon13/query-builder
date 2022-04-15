@@ -62,10 +62,36 @@ class Home extends CI_Controller {
 	}
 	public function table($slug=null){
 		//$this->load->database($_SESSION['db_data']->CI_DB_mysqli_driver, TRUE); 
-
+		$db = $_SESSION['db_name'];
 		$this->db->query('use '.$_SESSION['db_name']);
 		$column = $this->db->list_fields($slug);
 		//print_r($column);
+		$query = "SELECT COLUMN_NAME, DATA_TYPE, IS_NULLABLE, COLUMN_DEFAULT, 
+		COLUMN_TYPE,COLUMN_KEY FROM INFORMATION_SCHEMA.COLUMNS 
+		WHERE table_name = '$slug'
+		AND table_schema = '$db'";	
+	$result = $this->db->query($query)->result_array(); 
+		echo '<table border="2">';
+		echo '<tr>';
+		echo '<td>COLUMN_NAME</td>';
+		echo '<td>DATA_TYPE</td>';
+		echo '<td>IS_NULLABLE</td>';
+		echo '<td>COLUMN_DEFAULT</td>';
+		echo '<td>COLUMN_TYPE </td>';
+		echo '<td>COLUMN_KEY </td>';
+		echo '</tr>';
+		foreach($result as $results){
+			echo '<tr>';
+			echo '<td>'.$results["COLUMN_NAME"].'</td>';
+			echo '<td>'.$results["DATA_TYPE"].'</td>';
+			echo '<td>'.$results["IS_NULLABLE"].'</td>';
+			echo '<td>'.$results["COLUMN_DEFAULT"].'</td>';
+			echo '<td>'.$results["COLUMN_TYPE"].' </td>';
+			echo '<td>'.$results["COLUMN_KEY"].' </td>';
+			echo '</tr>';
+		}
+		echo '<table>';
+
 	}
 	public function add_table(){
 		$this->db->query('use '.$_SESSION['db_name']);
