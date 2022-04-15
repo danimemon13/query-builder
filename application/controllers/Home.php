@@ -93,6 +93,14 @@ class Home extends CI_Controller {
 		echo '<table>';
 
 	}
+	public function grants(){
+		$db = $_SESSION['db_name'];
+		$this->db->query('use '.$_SESSION['db_name']);
+		//print_r($column);
+		$query = "SHOW GRANTS FOR 'root'@'localhost'";
+		$result = $this->db->query($query)->result_array(); 
+		print_r($result);
+	}
 	public function datatypes(){
 		$db = $_SESSION['db_name'];
 		$this->db->query('use '.$_SESSION['db_name']);
